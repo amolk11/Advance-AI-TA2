@@ -1,0 +1,27 @@
+# ==============================================================================
+# Bayesian Air Quality Risk & Mitigation System — Dependencies
+# Python Target: >= 3.10
+# ==============================================================================
+
+# Core Data Science & Numerical Processing
+pandas>=2.0.0
+numpy>=1.26.0
+
+# Probabilistic Graphical Models & Graph Analysis
+pgmpy>=1.1.0
+networkx>=3.0
+tqdm>=4.66.0
+
+# Machine Learning & Statistical Evaluation
+scikit-learn>=1.4.0
+
+# Data Visualization & Charting
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Jupyter Interactive & Headless Execution Pipeline
+jupyter>=1.0.0
+notebook>=7.0.0
+ipykernel>=6.29.0
+nbformat>=5.9.0
+nbclient>=0.10.0
