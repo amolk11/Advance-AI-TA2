@@ -136,7 +136,7 @@ python scripts/generate_end_to_end_notebook.py
 
 ---
 
-## 🎓 Technical Viva & Interview FAQ
+## Technical FAQ
 
 <details>
 <summary><b>1. Why use a Bayesian Network instead of a standard classifier like XGBoost?</b></summary>
