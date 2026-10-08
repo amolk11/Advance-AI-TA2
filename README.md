@@ -5,7 +5,7 @@
 
 ---
 
-## 📌 Executive Summary
+## Executive Summary
 
 Urban air quality management requires decision-support tools that provide **well-calibrated probabilistic risk distributions** rather than black-box point forecasts. A single deterministic forecast (e.g., "AQI will be 145") fails to quantify the tail risk of severe pollution spikes, preventing public health officials from taking preemptive action.
 
@@ -19,7 +19,7 @@ The system explicitly captures:
 
 ---
 
-## 📐 Mathematical & Graphical Model Formulation
+## Mathematical & Graphical Model Formulation
 
 ```text
 ┌──────────────────────────────┐
@@ -50,7 +50,7 @@ This guarantees that all Conditional Probability Tables (CPDs) are strictly non-
 
 ---
 
-## 🛡️ Data Leakage & Temporal Continuity Audit
+## Data Leakage & Temporal Continuity Audit
 
 ### 1. The 957-Day Sensor Blackout Resolution
 An audit of the raw historical records (`2020–2026`) revealed a **957-day sensor blackout (missing data gap)** between **July 7, 2022** ($\text{AQI}=73.2$) and **February 18, 2025** ($\text{AQI}=96.4$). 
@@ -67,7 +67,7 @@ An audit of the raw historical records (`2020–2026`) revealed a **957-day sens
 
 ---
 
-## 📊 Experimental Benchmark Results
+## Experimental Benchmark Results
 
 Evaluated on the **unseen chronological holdout test set** ($N=58$ samples, Nov 2025 – Jan 2026; 80% train / 20% test split):
 
@@ -94,7 +94,7 @@ Evaluated on the **unseen chronological holdout test set** ($N=58$ samples, Nov 
 
 ---
 
-## 🚦 Prototype Decision Support Layer
+## Prototype Decision Support Layer
 
 Rather than forcing binary deterministic actions, the Bayesian posterior distributions feed directly into an operational risk matrix:
 
@@ -107,28 +107,31 @@ Rather than forcing binary deterministic actions, the Bayesian posterior distrib
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```text
 advanceai/
 ├── data/
 │   └── station_1_Revenue_Colony-Shivajinagar_Pu.csv   # Raw monitoring dataset (IITM Station 11613)
 ├── notebooks/
-│   └── temporal_air_quality_modeling.ipynb            # Complete, self-contained, pre-executed master notebook
+│   └── temporal_air_quality_modeling.ipynb
 ├── requirements.txt                                   # Python dependencies
 └── README.md                                          # Project documentation & interview guide
 ```
 
 ---
 
-## 🚀 Quickstart & Execution
+##  Quickstart & Execution
 
 ```bash
-# 1. Install dependencies
+# 1. Clone or open the workspace and install requirements
 pip install -r requirements.txt
 
-# 2. Launch Jupyter and open the master notebook
-jupyter notebook notebooks/temporal_air_quality_modeling.ipynb
+# 2. Run the complete mathematical audit & benchmark experiments
+python scripts/run_audit_and_experiments.py
+
+# 3. Re-build and pre-render the master Jupyter notebook
+python scripts/generate_end_to_end_notebook.py
 ```
 
 ---
@@ -157,6 +160,5 @@ A true 7-day weather forecast requires dynamic daily numerical weather predictio
 
 ---
 
-## 📄 License & Attribution
+## License & Attribution
 * **Dataset:** Central Pollution Control Board (CPCB) & Indian Institute of Tropical Meteorology (IITM) air monitoring station, Revenue Colony–Shivajinagar, Pune.
-* **Framework:** Antigravity AI Advanced Agentic Probabilistic Systems.
