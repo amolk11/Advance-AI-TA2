@@ -94,49 +94,65 @@ Evaluated on the **unseen chronological holdout test set** ($N=58$ samples, Nov 
 
 ---
 
-## Prototype Decision Support Layer
+## Decision Support Layer & Municipal Risk Matrix
 
 Rather than forcing binary deterministic actions, the Bayesian posterior distributions feed directly into an operational risk matrix:
 
-| Risk Tier | Posterior Probability Thresholds | Recommended Municipal Action |
-|:---|:---|:---|
-| **Routine / Low Risk** | $P(\text{Moderate} \cup \text{High}) < 0.30$ | Normal outdoor activity; standard baseline monitoring. |
-| **Elevated Advisory** | $0.30 \le P(\text{Moderate}) < 0.70$ and $P(\text{High}) < 0.20$ | Advise vulnerable demographic groups (asthma/elderly) to reduce prolonged exertion. |
-| **High Vigilance** | $P(\text{Moderate}) \ge 0.70$ or $0.20 \le P(\text{High}) < 0.50$ | Deploy mechanical road sweeping; traffic police manage high-congestion corridors. |
-| **Severe Alert** | $P(\text{High}) \ge 0.50$ | Issue public health emergency warning; activate industrial emission curbs. |
+| Protocol Code | Risk Tier | Posterior Probability Thresholds | Recommended Municipal Action |
+|:---|:---|:---|:---|
+| **TIER-1** | **Routine / Low Risk** | $P(\text{Moderate} \cup \text{High}) < 0.30$ | Normal outdoor activity; standard baseline monitoring. |
+| **TIER-2** | **Elevated Advisory** | $0.30 \le P(\text{Moderate}) < 0.70$ and $P(\text{High}) < 0.20$ | Advise vulnerable demographic groups (asthma/elderly) to reduce prolonged exertion. |
+| **TIER-3** | **High Vigilance** | $P(\text{Moderate}) \ge 0.70$ or $0.20 \le P(\text{High}) < 0.50$ | Deploy mechanical road sweeping; traffic police manage high-congestion corridors. |
+| **TIER-4** | **Severe Alert** | $P(\text{High}) \ge 0.50$ | Issue public health emergency warning; activate industrial emission curbs. |
 
 ---
 
-##  Repository Structure
+## Interactive Streamlit Web Application
+
+The `app/` directory provides a clean, modular Streamlit frontend for interactive scenario analysis and decision support:
+
+* **Risk Forecasting & Decision Support:** Interactive input panel to evaluate exact posterior distributions $P(\text{AQI}_t \mid \text{Evidence})$ and municipal advisory triggers in real time.
+* **Multi-Day Markov Simulation:** 1-to-14 day forward probability rollout simulating asymptotic equilibrium across seasons without teacher forcing.
+* **Station Data & Leakage Audit:** Time series explorer with AQI threshold zones, seasonal breakdowns, and data leakage audit tables.
+* **Bayesian Network & CPDs:** Directed Acyclic Graph inspector, conditional probability tables, and Dirichlet $\alpha$ prior tuning.
+* **Evaluation & Benchmark Validation:** Comprehensive model comparisons, ECE score breakdowns, and 3-Fold Walk-Forward Cross-Validation tables.
+
+---
+
+## Repository Structure
 
 ```text
 advanceai/
+├── app/
+│   ├── main.py                                        # Streamlit frontend web dashboard
+│   ├── model.py                                       # Bayesian network & inference core engine
+│   └── streamlit_app.py                               # Application entrypoint alias
 ├── data/
 │   └── station_1_Revenue_Colony-Shivajinagar_Pu.csv   # Raw monitoring dataset (IITM Station 11613)
 ├── notebooks/
-│   └── temporal_air_quality_modeling.ipynb
+│   └── temporal_air_quality_modeling.ipynb           # Complete modeling, validation & analysis notebook
 ├── requirements.txt                                   # Python dependencies
-└── README.md                                          # Project documentation & interview guide
+└── README.md                                          # Project documentation & technical interview guide
 ```
 
 ---
 
-##  Quickstart & Execution
+## Quickstart & Execution
 
 ```bash
 # 1. Clone or open the workspace and install requirements
 pip install -r requirements.txt
 
-# 2. Run the complete mathematical audit & benchmark experiments
-python scripts/run_audit_and_experiments.py
+# 2. Launch the Streamlit Frontend Web Dashboard
+streamlit run app/main.py
 
-# 3. Re-build and pre-render the master Jupyter notebook
-python scripts/generate_end_to_end_notebook.py
+# 3. (Optional) Run or explore the master Jupyter modeling notebook
+jupyter notebook notebooks/temporal_air_quality_modeling.ipynb
 ```
 
 ---
 
-## 🎓 Technical Viva & Interview FAQ
+## Technical FAQ
 
 <details>
 <summary><b>1. Why use a Bayesian Network instead of a standard classifier like XGBoost?</b></summary>
